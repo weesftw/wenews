@@ -1,0 +1,7 @@
+plugins {
+    id("com.weesftw.common")
+}
+
+dependencies {
+    implementation('io.micronaut:micronaut-inject:3.7.1')
+}

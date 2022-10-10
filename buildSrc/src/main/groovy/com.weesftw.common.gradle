@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+version = "0.1"
+group = "com.weesftw"
+
+dependencies {
+    implementation 'com.bettercloud:vault-java-driver:5.1.0'
+    compileOnly 'org.graalvm.nativeimage:svm:22.2.0.1'
+    implementation 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    runtimeOnly 'org.slf4j:slf4j-simple:2.0.3'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+    testImplementation 'org.mockito:mockito-core:4.8.0'
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion '17'
+    targetCompatibility = JavaVersion.toVersion '17'
+}

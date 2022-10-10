@@ -1,0 +1,37 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.micronaut.application") version "3.6.2"
+    id("io.micronaut.graalvm") version "3.6.2"
+    id("io.micronaut.aot") version "3.6.2"
+
+    id("com.weesftw.micronaut-core")
+}
+
+dependencies {
+    implementation project(":common")
+    implementation 'com.password4j:password4j:1.6.0'
+    implementation 'mysql:mysql-connector-java:8.0.30'
+    compileOnly 'io.micronaut.reactor:micronaut-reactor'
+    implementation 'io.micronaut:micronaut-management'
+    implementation 'io.micronaut.security:micronaut-security-jwt'
+    implementation 'io.micronaut.micrometer:micronaut-micrometer-core'
+    annotationProcessor 'io.micronaut.security:micronaut-security-annotations'
+    implementation 'io.micronaut.micrometer:micronaut-micrometer-registry-prometheus'
+}
+
+application {
+    mainClass.set("com.weesftw.Application")
+}
+
+graalvmNative.toolchainDetection = false
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.weesftw.*")
+    }
+}
+
+
+

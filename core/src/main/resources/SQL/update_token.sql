@@ -1,0 +1,1 @@
+update `tokens` set `revoked` = ? where `refresh_token` = ?;

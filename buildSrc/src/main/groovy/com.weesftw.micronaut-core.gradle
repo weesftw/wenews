@@ -1,0 +1,15 @@
+plugins {
+    id 'com.weesftw.common'
+}
+
+dependencies {
+    implementation 'org.mongodb:mongo-java-driver:3.12.11'
+    implementation 'com.zaxxer:HikariCP'
+
+    annotationProcessor 'io.micronaut:micronaut-http-validation'
+    implementation 'io.micronaut.rabbitmq:micronaut-rabbitmq'
+    implementation 'io.micronaut:micronaut-http-client'
+    implementation 'io.micronaut:micronaut-jackson-databind'
+    implementation 'jakarta.annotation:jakarta.annotation-api'
+    implementation 'io.micronaut:micronaut-validation'
+}

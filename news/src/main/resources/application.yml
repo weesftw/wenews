@@ -1,0 +1,9 @@
+micronaut:
+  server:
+    port: 8081
+rabbitmq:
+  uri: ${RABBITMQ_URL}
+mongo:
+  database: test
+newsapi:
+  url: https://newsapi.org/v2/top-headlines?country=br&apiKey=${NEWSAPI_KEY}
