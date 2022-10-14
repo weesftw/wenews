@@ -1,4 +1,4 @@
-package com.weesftw;
+package com.weesftw.common;
 
 public interface Config {
 

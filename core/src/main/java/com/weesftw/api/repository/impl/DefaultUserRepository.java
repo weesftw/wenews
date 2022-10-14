@@ -4,7 +4,7 @@ import com.weesftw.api.model.User;
 import com.weesftw.api.model.request.CreateUserRequest;
 import com.weesftw.api.repository.RoleRepository;
 import com.weesftw.api.repository.UserRepository;
-import com.weesftw.Config;
+import com.weesftw.common.Config;
 import jakarta.inject.Singleton;
 
 import javax.sql.DataSource;

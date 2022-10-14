@@ -1,0 +1,1 @@
+select * from `news_outbox` where news_id = ?

@@ -1,7 +1,9 @@
 package com.weesftw.api.factory;
 
-import com.weesftw.Config;
-import com.weesftw.context.Factory;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
+import com.weesftw.common.Config;
+import com.weesftw.common.context.Factory;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.inject.Singleton;
@@ -26,5 +28,11 @@ public class DefaultDataSource {
         hikariConfig.setPassword(config.get("DS_PASSWD"));
 
         return new HikariDataSource(hikariConfig);
+    }
+
+    @Singleton
+    public MongoDatabase mongoClient() {
+        var connection = MongoClients.create(config.get("MONGO_URI"));
+        return connection.getDatabase(config.get("mongo.database"));
     }
 }

@@ -2,7 +2,7 @@ package com.weesftw.api.repository.impl;
 
 import com.weesftw.api.model.Category;
 import com.weesftw.api.repository.CategoryRepository;
-import com.weesftw.Config;
+import com.weesftw.common.Config;
 import jakarta.inject.Singleton;
 
 import javax.sql.DataSource;

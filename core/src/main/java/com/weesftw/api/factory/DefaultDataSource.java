@@ -1,7 +1,7 @@
 package com.weesftw.api.factory;
 
-import com.weesftw.Config;
-import com.weesftw.context.Factory;
+import com.weesftw.common.Config;
+import com.weesftw.common.context.Factory;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import io.micrometer.core.instrument.MeterRegistry;

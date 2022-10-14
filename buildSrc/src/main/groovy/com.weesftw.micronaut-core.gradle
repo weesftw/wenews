@@ -5,6 +5,7 @@ plugins {
 dependencies {
     implementation 'org.mongodb:mongo-java-driver:3.12.11'
     implementation 'com.zaxxer:HikariCP'
+    implementation 'mysql:mysql-connector-java:8.0.30'
 
     annotationProcessor 'io.micronaut:micronaut-http-validation'
     implementation 'io.micronaut.rabbitmq:micronaut-rabbitmq'

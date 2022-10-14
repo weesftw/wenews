@@ -1,12 +1,11 @@
-package com.weesftw.context;
+package com.weesftw.common.context;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 @Documented
-@io.micronaut.context.annotation.Factory
-@Target({java.lang.annotation.ElementType.TYPE})
+@io.micronaut.context.annotation.Context
 @Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
-public @interface Factory {
+public @interface Context {
 }

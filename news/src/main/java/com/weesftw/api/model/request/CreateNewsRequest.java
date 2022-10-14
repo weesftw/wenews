@@ -1,5 +1,6 @@
 package com.weesftw.api.model.request;
 
+import com.weesftw.common.context.Introspected;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 @Setter
 @Builder
 @ToString
+@Introspected
 @EqualsAndHashCode
 public class CreateNewsRequest {
 

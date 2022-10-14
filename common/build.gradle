@@ -1,7 +1,4 @@
 plugins {
+    id("io.micronaut.application") version "3.6.2"
     id("com.weesftw.common")
-}
-
-dependencies {
-    implementation('io.micronaut:micronaut-inject:3.7.1')
 }

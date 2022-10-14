@@ -28,7 +28,7 @@ public class DefaultNewsService implements NewsService {
     }
 
     @Override
-    public News saveNews(CreateNewsRequest news) {
-        return repository.saveNews(news);
+    public News saveNews(CreateNewsRequest createNewsRequest) {
+        return repository.saveNews(createNewsRequest);
     }
 }

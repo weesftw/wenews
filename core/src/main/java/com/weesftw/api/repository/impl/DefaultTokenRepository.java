@@ -1,6 +1,6 @@
 package com.weesftw.api.repository.impl;
 
-import com.weesftw.Config;
+import com.weesftw.common.Config;
 import com.weesftw.api.model.Token;
 import com.weesftw.api.repository.TokenRepository;
 import com.weesftw.api.repository.UserRepository;

@@ -10,7 +10,6 @@ plugins {
 dependencies {
     implementation project(":common")
     implementation 'com.password4j:password4j:1.6.0'
-    implementation 'mysql:mysql-connector-java:8.0.30'
     compileOnly 'io.micronaut.reactor:micronaut-reactor'
     implementation 'io.micronaut:micronaut-management'
     implementation 'io.micronaut.security:micronaut-security-jwt'

@@ -9,5 +9,5 @@ public interface NewsService {
 
     List<News> getNews();
     List<News> getNews(String category);
-    News saveNews(CreateNewsRequest news);
+    News saveNews(CreateNewsRequest createNewsRequest);
 }

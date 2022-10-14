@@ -3,8 +3,8 @@ package com.weesftw.adapter.listener;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import io.micronaut.rabbitmq.connect.ChannelInitializer;
-
 import jakarta.inject.Singleton;
+
 import java.io.IOException;
 
 @Singleton

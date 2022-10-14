@@ -1,11 +1,11 @@
-package com.weesftw;
+package com.weesftw.common;
 
 import com.bettercloud.vault.Vault;
 import com.bettercloud.vault.VaultConfig;
 import com.bettercloud.vault.VaultException;
-import com.weesftw.context.Context;
-import com.weesftw.context.Environment;
-import com.weesftw.exception.ConfigLoaderException;
+import com.weesftw.common.context.Context;
+import com.weesftw.common.context.Environment;
+import com.weesftw.common.exception.ConfigLoaderException;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +16,6 @@ import java.util.Map;
 
 @Slf4j
 @Context
-@Singleton
 public class DefaultConfig implements Config {
 
     private final Environment environment;

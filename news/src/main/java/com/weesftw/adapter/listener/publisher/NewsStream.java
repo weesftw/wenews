@@ -1,12 +1,12 @@
-package com.weesftw.adapter.listener.producer;
+package com.weesftw.adapter.listener.publisher;
 
 import com.weesftw.api.model.News;
 import io.micronaut.rabbitmq.annotation.Binding;
 import io.micronaut.rabbitmq.annotation.RabbitClient;
 
 @RabbitClient("newsapp")
-public interface NewsProducer {
+public interface NewsStream {
 
     @Binding("news")
-    void updateNews(News data);
+    void send(News data);
 }

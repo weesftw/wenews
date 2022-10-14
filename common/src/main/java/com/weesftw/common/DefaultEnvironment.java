@@ -1,15 +1,13 @@
-package com.weesftw.adapter;
+package com.weesftw.common;
 
-import com.weesftw.context.Environment;
-import io.micronaut.context.annotation.Bean;
-import io.micronaut.context.annotation.Context;
-import io.micronaut.context.annotation.Factory;
+import com.weesftw.common.context.Context;
+import com.weesftw.common.context.Environment;
+import com.weesftw.common.context.Factory;
 import jakarta.inject.Singleton;
 
 @Factory
-public class BeanFactory {
+public class DefaultEnvironment {
 
-    @Bean
     @Context
     @Singleton
     public Environment getEnvironment(io.micronaut.context.env.Environment environment) {
