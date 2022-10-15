@@ -23,6 +23,11 @@ public class DefaultNewsService implements NewsService {
     }
 
     @Override
+    public News get(String title) {
+        return repository.get(title);
+    }
+
+    @Override
     public List<News> getNews(String category) {
         return repository.getNews(category);
     }

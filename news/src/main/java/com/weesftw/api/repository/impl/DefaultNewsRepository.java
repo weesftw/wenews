@@ -25,10 +25,11 @@ import static java.lang.String.format;
 @Singleton
 public class DefaultNewsRepository implements NewsRepository {
 
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper;
     private final MongoCollection<Document> collection;
 
-    public DefaultNewsRepository(MongoDatabase database) {
+    public DefaultNewsRepository(MongoDatabase database, ObjectMapper mapper) {
+        this.mapper = mapper;
         this.collection = database.getCollection("news");
     }
 
@@ -47,11 +48,34 @@ public class DefaultNewsRepository implements NewsRepository {
     }
 
     @Override
+    public News get(String title) {
+        var document = collection.find(and(eq("title", title))).first();
+        try {
+            if(document != null) {
+                var map = mapper.readValue(document.toJson(), CreateNewsRequest.class);
+                return News.builder()
+                        .id(document.getObjectId("_id").toString())
+                        .title(map.getTitle())
+                        .description(map.getDescription())
+                        .url(map.getUrl())
+                        .author(map.getAuthor())
+                        .category(map.getCategory())
+                        .publishedAt(map.getPublishedAt())
+                        .build();
+            }
+
+            return null;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public List<News> getNews(String category) {
         var news = new ArrayList<com.weesftw.api.model.News>();
         collection.find(and(eq("category", category))).forEach((Consumer<? super Document>) doc -> {
             try {
-                news.add(mapper.readValue(doc.toJson(), com.weesftw.api.model.News.class));
+                news.add(mapper.readValue(doc.toJson(), News.class));
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
@@ -72,9 +96,9 @@ public class DefaultNewsRepository implements NewsRepository {
                         .id(objectId.toHexString())
                         .title(createNewsRequest.getTitle())
                         .description(createNewsRequest.getDescription())
-                        .pubDate(createNewsRequest.getPubDate())
-                        .link(createNewsRequest.getLink())
-                        .image(createNewsRequest.getImage())
+                        .publishedAt(createNewsRequest.getPublishedAt())
+                        .url(createNewsRequest.getUrl())
+                        .imageToUrl(createNewsRequest.getUrlToImage())
                         .category(createNewsRequest.getCategory())
                         .build();
             }

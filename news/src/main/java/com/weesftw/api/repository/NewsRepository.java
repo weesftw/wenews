@@ -9,6 +9,7 @@ import java.util.List;
 public interface NewsRepository {
 
     List<News> getNews();
+    News get(String title);
     List<News> getNews(String category);
     News saveNews(CreateNewsRequest news);
 

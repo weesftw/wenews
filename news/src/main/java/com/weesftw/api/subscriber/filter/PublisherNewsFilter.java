@@ -27,8 +27,12 @@ public class PublisherNewsFilter implements SubscriberFilter<Message<News>> {
     }
 
     @Override
-    public void doFilter(Message<News> message) throws SQLException {
-        repository.commit(message.body());
-        stream.send(message.body());
+    public void doFilter(Message<News> message) {
+        try {
+            repository.commit(message.body());
+            stream.send(message.body());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

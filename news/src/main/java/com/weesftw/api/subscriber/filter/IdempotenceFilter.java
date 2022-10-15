@@ -25,9 +25,13 @@ public class IdempotenceFilter implements SubscriberFilter<Message<News>> {
     }
 
     @Override
-    public void doFilter(Message<News> message) throws SQLException {
-        var isCommited = repository.isCommited(message.body().getId());
-        if(isCommited)
-            throw new NewsAlreadyCommitedException();
+    public void doFilter(Message<News> message) {
+        try {
+            var isCommited = repository.isCommited(message.body().getId());
+            if(isCommited)
+                throw new NewsAlreadyCommitedException(message.body().getId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

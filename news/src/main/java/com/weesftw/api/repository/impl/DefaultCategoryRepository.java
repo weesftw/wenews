@@ -20,8 +20,8 @@ public class DefaultCategoryRepository implements CategoryRepository {
 
     public DefaultCategoryRepository(DataSource dataSource, Config envs) {
         this.dataSource = dataSource;
-        this.getCategory = envs.get("/SQL/get_external_category.sql");
-        this.getCategories = envs.get("/SQL/get_external_categories.sql");
+        this.getCategory = envs.get("/sql/get_category.sql");
+        this.getCategories = envs.get("/sql/get_categories.sql");
     }
 
     @Override
@@ -37,7 +37,6 @@ public class DefaultCategoryRepository implements CategoryRepository {
                         .name(rs.getString("name"))
                         .password(rs.getString("password"))
                         .isPublic(rs.getBoolean("is_public"))
-                        .enabled(rs.getBoolean("enabled"))
                         .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
                         .build();
             }
@@ -62,7 +61,6 @@ public class DefaultCategoryRepository implements CategoryRepository {
                         .name(rs.getString("name"))
                         .password(rs.getString("password"))
                         .isPublic(rs.getBoolean("is_public"))
-                        .enabled(rs.getBoolean("enabled"))
                         .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
                         .build());
             }

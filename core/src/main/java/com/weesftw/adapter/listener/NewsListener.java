@@ -1,5 +1,6 @@
 package com.weesftw.adapter.listener;
 
+import com.weesftw.api.model.News;
 import io.micronaut.rabbitmq.annotation.Queue;
 import io.micronaut.rabbitmq.annotation.RabbitListener;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 public class NewsListener {
 
     @Queue("news")
-    public void receive(byte[] data) {
-        log.info("News received: {}", new String(data));
+    public void receive(News data) {
+        log.info("News received: {}", data);
     }
 }

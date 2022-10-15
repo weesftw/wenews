@@ -17,8 +17,5 @@ public class Category {
     private String name;
     private String password;
     private boolean isPublic;
-    private boolean enabled;
     private LocalDateTime createdAt;
-
-    private int count;
 }

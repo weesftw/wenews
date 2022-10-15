@@ -8,6 +8,6 @@ mongo:
 ds:
   url: jdbc:mysql://localhost:3306/whatishappen?useTimezone=true&serverTimezone=UTC
 newsapi:
-  url: https://newsapi.org/v2/top-headlines?country=br&apiKey=${NEWSAPI_KEY}
+  url: https://newsapi.org/v2/top-headlines?country=br&pageSize=1&apiKey=${NEWSAPI_KEY}
 vault:
   path: ${VAULT_PATH:core/datasource}
