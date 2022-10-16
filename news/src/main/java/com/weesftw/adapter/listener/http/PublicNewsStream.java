@@ -42,7 +42,7 @@ public class PublicNewsStream {
         });
     }
 
-    @Scheduled(fixedDelay = "3m")
+    @Scheduled(cron = "30 1 * * *")
     public void getNews() {
         urls.forEach((category, url) -> {
             try {
