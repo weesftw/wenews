@@ -1,6 +1,5 @@
 package com.weesftw.api.model;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.weesftw.common.context.Introspected;
 import lombok.*;
 

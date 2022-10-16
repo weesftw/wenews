@@ -1,9 +1,9 @@
 package com.weesftw.api.repository.impl;
 
-import com.weesftw.common.Config;
 import com.weesftw.api.model.Token;
 import com.weesftw.api.repository.TokenRepository;
 import com.weesftw.api.repository.UserRepository;
+import com.weesftw.common.Config;
 import jakarta.inject.Singleton;
 
 import javax.sql.DataSource;

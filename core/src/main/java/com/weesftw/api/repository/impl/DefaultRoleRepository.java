@@ -1,8 +1,8 @@
 package com.weesftw.api.repository.impl;
 
+import com.weesftw.api.model.Role;
 import com.weesftw.api.repository.RoleRepository;
 import com.weesftw.common.Config;
-import com.weesftw.api.model.Role;
 import jakarta.inject.Singleton;
 
 import javax.sql.DataSource;

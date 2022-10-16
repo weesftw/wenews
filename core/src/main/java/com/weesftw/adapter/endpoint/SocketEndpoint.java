@@ -1,8 +1,8 @@
 package com.weesftw.adapter.endpoint;
 
 import com.weesftw.api.model.Socket;
-import com.weesftw.api.service.SocketService;
 import com.weesftw.api.service.SenderService;
+import com.weesftw.api.service.SocketService;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.PathVariable;
 import io.micronaut.websocket.WebSocketBroadcaster;

@@ -1,7 +1,8 @@
 package com.weesftw.api.model.response;
 
 import com.weesftw.common.context.Introspected;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @Getter
 @Introspected

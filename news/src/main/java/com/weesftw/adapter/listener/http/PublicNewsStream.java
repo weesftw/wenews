@@ -1,8 +1,9 @@
 package com.weesftw.adapter.listener.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.weesftw.adapter.event.EventHandler;
-import com.weesftw.adapter.listener.http.wrapper.WrapperNewsResponse;
+import com.weesftw.adapter.listener.http.serializer.NewsDeserializer;
 import com.weesftw.api.model.request.CreateNewsRequest;
 import com.weesftw.api.service.CategoryService;
 import com.weesftw.common.Config;
@@ -33,14 +34,15 @@ public class PublicNewsStream {
 
     public PublicNewsStream(Config config, CategoryService service, EventHandler<CreateNewsRequest> e, ObjectMapper mapper) {
         this.e = e;
-        this.mapper = mapper;
+        this.mapper = mapper.registerModule(new SimpleModule().addDeserializer(CreateNewsRequest.class, new NewsDeserializer()));
+
         var url = config.get("newsapi.url");
         service.getAll().forEach(category -> {
             urls.put(category, url.concat("&category=" + category));
         });
     }
 
-    @Scheduled(fixedDelay = "1m")
+    @Scheduled(fixedDelay = "3m")
     public void getNews() {
         urls.forEach((category, url) -> {
             try {
@@ -52,16 +54,10 @@ public class PublicNewsStream {
                         .build();
 
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
                 if(response.statusCode() == 200) {
-                    var news = mapper.readValue(response.body(), WrapperNewsResponse.class);
-                    if(news != null) {
-                        if(news.getArticles().size() > 0) {
-                            var result = news.getArticles().get(0);
-                            result.setCategory(category);
-                            e.handler(result);
-                        }
-                    }
+                    var news = mapper.readValue(response.body(), CreateNewsRequest.class);
+                    news.setCategory(category);
+                    e.handle(news);
                 }
 
                 log.warn(format("newsapi.org returned %s status code, requests has been refused.", response.statusCode()));

@@ -1,7 +1,6 @@
 package com.weesftw.api.model.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.weesftw.common.context.Introspected;
 import lombok.*;
 

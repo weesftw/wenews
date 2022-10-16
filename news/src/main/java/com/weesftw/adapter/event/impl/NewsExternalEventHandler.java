@@ -21,7 +21,7 @@ public class NewsExternalEventHandler implements EventHandler<CreateNewsRequest>
     }
 
     @Override
-    public void handler(CreateNewsRequest body) {
+    public void handle(CreateNewsRequest body) {
         if(body != null) {
             News news;
             try {

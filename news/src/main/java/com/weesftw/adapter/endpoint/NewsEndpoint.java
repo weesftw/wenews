@@ -24,7 +24,7 @@ public class NewsEndpoint {
 
     @Post("/v1/news")
     public HttpResponse<Object> saveNews(@Valid CreateNewsRequest body, HttpRequest<CreateNewsRequest> request) {
-        e.handler(request);
+        e.handle(request);
         return HttpResponse.created(body);
     }
 

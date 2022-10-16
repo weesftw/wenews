@@ -6,7 +6,6 @@ import com.bettercloud.vault.VaultException;
 import com.weesftw.common.context.Context;
 import com.weesftw.common.context.Environment;
 import com.weesftw.common.exception.ConfigLoaderException;
-import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;

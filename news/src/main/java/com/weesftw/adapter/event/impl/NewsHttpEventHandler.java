@@ -19,7 +19,7 @@ public class NewsHttpEventHandler implements EventHandler<HttpRequest<CreateNews
     }
 
     @Override
-    public void handler(HttpRequest<CreateNewsRequest> request) {
+    public void handle(HttpRequest<CreateNewsRequest> request) {
         if(request.getBody().isPresent()) {
             var body = request.getBody().get();
             var news = service.saveNews(body);

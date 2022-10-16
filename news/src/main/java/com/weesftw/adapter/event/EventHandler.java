@@ -3,5 +3,5 @@ package com.weesftw.adapter.event;
 @FunctionalInterface
 public interface EventHandler<T> {
 
-    void handler(T obj);
+    void handle(T obj);
 }

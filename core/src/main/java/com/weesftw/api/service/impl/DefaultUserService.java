@@ -2,9 +2,8 @@ package com.weesftw.api.service.impl;
 
 import com.password4j.Password;
 import com.weesftw.api.exception.PersistenceException;
-import com.weesftw.api.model.request.CreateUserRequest;
-import com.weesftw.api.model.Role;
 import com.weesftw.api.model.User;
+import com.weesftw.api.model.request.CreateUserRequest;
 import com.weesftw.api.repository.UserRepository;
 import com.weesftw.api.service.UserService;
 import jakarta.inject.Singleton;
