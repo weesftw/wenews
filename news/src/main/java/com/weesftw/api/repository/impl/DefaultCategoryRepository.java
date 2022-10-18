@@ -36,7 +36,9 @@ public class DefaultCategoryRepository implements CategoryRepository {
                         .id(rs.getInt("id"))
                         .name(rs.getString("name"))
                         .password(rs.getString("password"))
-                        .isPublic(rs.getBoolean("is_public"))
+                        .isPublic(rs.getBoolean("public"))
+                        .enabled(rs.getBoolean("enabled"))
+                        .updatedAt(rs.getTimestamp("updated_at").toLocalDateTime())
                         .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
                         .build();
             }
@@ -60,7 +62,9 @@ public class DefaultCategoryRepository implements CategoryRepository {
                         .id(rs.getInt("id"))
                         .name(rs.getString("name"))
                         .password(rs.getString("password"))
-                        .isPublic(rs.getBoolean("is_public"))
+                        .isPublic(rs.getBoolean("public"))
+                        .enabled(rs.getBoolean("enabled"))
+                        .updatedAt(rs.getTimestamp("updated_at").toLocalDateTime())
                         .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
                         .build());
             }

@@ -39,10 +39,11 @@ public class SocketEndpoint {
 
         var socket = Socket.builder()
                 .user(username)
+                .category(category)
                 .session(session.getId())
                 .build();
 
-        socketService.addSocket(socket, category);
+        socketService.addSocket(socket);
         var response = senderService.sendOnJoinLeft(CONSOLE, format("%s joined.", username), category);
         return broadcaster.broadcast(response, isValid(category));
     }

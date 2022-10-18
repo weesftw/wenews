@@ -18,9 +18,18 @@ public class DefaultCategoryService implements CategoryService {
     }
 
     @Override
-    public List<String> getAll() {
+    public Category getCategory(String name) {
         try {
-            return repository.getAll().stream().map(Category::getName).toList();
+            return repository.get(name);
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<Category> getAll() {
+        try {
+            return repository.getAll();
         } catch(SQLException e) {
             throw new RuntimeException(e);
         }

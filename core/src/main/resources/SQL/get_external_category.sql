@@ -1,1 +1,0 @@
-select * from `external_categories` where `name` = ?;

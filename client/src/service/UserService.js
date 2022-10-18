@@ -2,11 +2,11 @@ const axios = require('axios')
 import decode from 'jwt-decode';
 
 function createUser(user) {
-    return axios.post("/user", user);
+    return axios.post("/core/user", user);
 }
 
 function signIn(user) {
-    return axios.post("/login", {
+    return axios.post("/core/login", {
         username: user.username,
         password: user.password
     });
@@ -31,7 +31,7 @@ function isSignedIn() {
         const isExpired = !!expiration && Date.now() > expiration * 1000;
 
         if (isExpired) {
-            axios.post('/oauth/access_token', {
+            axios.post('/core/oauth/access_token', {
                 refresh_token: refreshToken,
                 grant_type: "refresh_token"
             }).then(value => {

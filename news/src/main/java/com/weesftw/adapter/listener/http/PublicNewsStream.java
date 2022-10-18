@@ -25,7 +25,6 @@ import static java.lang.String.format;
 import static java.time.temporal.ChronoUnit.SECONDS;
 
 @Slf4j
-@Singleton
 public class PublicNewsStream {
 
     private final ObjectMapper mapper;
@@ -38,7 +37,9 @@ public class PublicNewsStream {
 
         var url = config.get("newsapi.url");
         service.getAll().forEach(category -> {
-            urls.put(category, url.concat("&category=" + category));
+            var name = category.getName();
+            if(name != null)
+                urls.put(name, url.concat("&category=" + category));
         });
     }
 

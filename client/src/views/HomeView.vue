@@ -62,8 +62,8 @@ export default {
 
   mounted() {
     CategoryService.getAll().then(value => {
-      this.totalOnline = value.data.allUsers,
-      this.categories = value.data.categories;
+      this.totalOnline = 0;
+      this.categories = value.data;
     });
   },
 

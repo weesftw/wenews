@@ -3,9 +3,7 @@ package com.weesftw.api.service.impl;
 import com.weesftw.api.exception.InvalidCategoryException;
 import com.weesftw.api.exception.SocketNotFoundException;
 import com.weesftw.api.exception.UserNotFoundException;
-import com.weesftw.api.model.Category;
 import com.weesftw.api.model.Socket;
-import com.weesftw.api.service.CategoryService;
 import com.weesftw.api.service.SocketService;
 import com.weesftw.api.service.UserService;
 import jakarta.inject.Singleton;
@@ -19,14 +17,12 @@ import static java.util.Collections.emptyList;
 @Singleton
 public class DefaultSocketService implements SocketService {
 
-    private final Map<Category, List<Socket>> sockets = new LinkedHashMap<>();
+    private final Map<String, List<Socket>> sockets = new LinkedHashMap<>();
 
     private final UserService userService;
-    private final CategoryService categoryService;
 
-    public DefaultSocketService(UserService userService, CategoryService categoryService) {
+    public DefaultSocketService(UserService userService) {
         this.userService = userService;
-        this.categoryService = categoryService;
     }
 
     @Override
@@ -38,19 +34,19 @@ public class DefaultSocketService implements SocketService {
     }
 
     @Override
-    public void addSocket(Socket socket, String category) {
+    public void addSocket(Socket socket) {
         var user = userService.getUser(socket.getUser());
-        var var1 = categoryService.getCategory(category);
-        if(var1 != null) {
+        var category = socket.getCategory();
+        if(category != null) {
             if(user != null) {
-                if(!sockets.containsKey(var1)) {
+                if(!sockets.containsKey(category)) {
                     var arr = new ArrayList<Socket>();
                     arr.add(socket);
-                    sockets.put(var1, arr);
+                    sockets.put(category, arr);
                     return;
                 }
 
-                sockets.get(var1).add(socket);
+                sockets.get(category).add(socket);
                 return;
             }
 
@@ -70,14 +66,14 @@ public class DefaultSocketService implements SocketService {
     }
 
     @Override
-    public Map<Category, List<Socket>> getSockets() {
+    public Map<String, List<Socket>> getSockets() {
         return sockets;
     }
 
     @Override
     public List<Socket> getSockets(String category) {
         return sockets.entrySet().stream()
-                .filter(entry -> entry.getKey().getName().equals(category))
+                .filter(entry -> entry.getKey().equals(category))
                 .map(Map.Entry::getValue).findFirst().orElse(emptyList());
     }
 }

@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 function getAll() {
-    return axios.get("/v1/categories");
+    return axios.get("/news/v1/categories");
 }
 
 export default {

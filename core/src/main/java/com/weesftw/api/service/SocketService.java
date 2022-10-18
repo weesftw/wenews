@@ -1,6 +1,5 @@
 package com.weesftw.api.service;
 
-import com.weesftw.api.model.Category;
 import com.weesftw.api.model.Socket;
 
 import java.util.List;
@@ -13,9 +12,9 @@ public interface SocketService {
 
     boolean removeSocket(String username);
 
-    void addSocket(Socket socket, String category);
+    void addSocket(Socket socket);
 
-    Map<Category, List<Socket>> getSockets();
+    Map<String, List<Socket>> getSockets();
 
     List<Socket> getSockets(String category);
 }

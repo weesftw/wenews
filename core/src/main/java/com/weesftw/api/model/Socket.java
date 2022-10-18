@@ -13,4 +13,5 @@ public class Socket {
 
     private String user;
     private String session;
+    private String category;
 }
