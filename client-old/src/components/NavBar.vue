@@ -6,8 +6,7 @@
         <router-link v-if="!isSignedIn" class="btn btn-danger" to="/signIn">Sign In</router-link>
         <div v-if="isSignedIn">
           <div class="dropdown">
-            <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Welcome, {{ username }}
             </button>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
@@ -26,18 +25,18 @@
   </nav>
 </template>
 
-<script lang="ts">
-import UserService from '../service/UserService';
-import { useRouter } from 'vue-router'
+<script>
+import UserService from "@/service/UserService";
+import router from "@/router";
 
 export default {
-  name: 'NavBar',
+  name: "NavBar",
 
   data() {
     return {
       isSignedIn: UserService.isSignedIn(),
       isAdmin: UserService.isAdmin(),
-      projectName: 'WhatIsHappen',
+      projectName: process.env.VUE_APP_TITLE,
       username: localStorage.getItem('username')
     }
   },
@@ -45,7 +44,7 @@ export default {
   methods: {
     signOut() {
       UserService.signOut();
-      useRouter().push('/login')
+      router.push('/login')
     }
   }
 }
