@@ -151,7 +151,7 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
-client/.vscode
-client/.quasar
+client/.vscode/
+client/.quasar/
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,java,intellij+all,vuejs
