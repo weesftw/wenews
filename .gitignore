@@ -151,4 +151,6 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
+.vscode
+
 # End of https://www.toptal.com/developers/gitignore/api/gradle,java,intellij+all,vuejs
