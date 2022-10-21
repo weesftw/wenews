@@ -1,6 +1,5 @@
 <template>
   <div class="d-flex flex-column min-vh-100">
-    <NavBar />
     <router-view />
   </div>
 </template>

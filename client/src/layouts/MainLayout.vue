@@ -86,12 +86,8 @@
             </q-badge>
             <q-tooltip>Notifications</q-tooltip>
           </q-btn>
-          <q-btn round flat>
-            <q-avatar size="26px">
-              <img src="https://yt3.ggpht.com/ytc/AMLnZu-15DIYEfL5o7qFG7ukgIDfwVc9pxhXtxGL6Bkw=s900-c-k-c0x00ffffff-no-rj">
-            </q-avatar>
-            <q-tooltip>Account</q-tooltip>
-          </q-btn>
+
+          <AccountComponent />
         </div>
       </q-toolbar>
     </q-header>
@@ -155,10 +151,13 @@
 <script>
 import { ref } from 'vue'
 import {fasFlask} from '@quasar/extras/fontawesome-v6';
+import AccountComponent from '../components/AccountComponent';
 
 export default {
   name: 'MainLayout',
+  components: {AccountComponent},
   setup () {
+    const isAuth = ref(false)
     const leftDrawerOpen = ref(false)
     const search = ref('')
     const showAdvanced = ref(false)
@@ -183,6 +182,7 @@ export default {
       leftDrawerOpen.value = !leftDrawerOpen.value
     }
     return {
+      isAuth,
       leftDrawerOpen,
       search,
       showAdvanced,

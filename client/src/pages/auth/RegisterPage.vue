@@ -6,16 +6,48 @@
           <p class="text-body1">Sign In</p>
         </q-card-section>
       <q-card-section>
-        <div class="q-pa-md" style="width: 400px">
-
+        <div class="q-pa-md">
           <q-form
             @submit="onSubmit"
             @reset="onReset"
             class="q-gutter-md"
           >
+            <div class="justify-between row">
+              <q-input
+                filled
+                class="col-5"
+                v-model="firstName"
+                label="First name"
+                hint="First name social"
+                lazy-rules
+                :rules="[ val => val && val.length > 0 || 'Please type something']"
+              />
+
+              <q-input
+                filled
+                class="col-5"
+                v-model="lastName"
+                label="Last name"
+                hint="Last name social"
+                lazy-rules
+                :rules="[ val => val && val.length > 0 || 'Please type something']"
+              />
+            </div>
+
+            <q-input
+              filled
+              v-model="email"
+              type="email"
+              label="E-mail"
+              hint="Personal e-mail"
+              lazy-rules
+              :rules="[ val => val && val.length > 0 || 'Please type something']"
+            />
+
             <q-input
               filled
               v-model="username"
+              type="username"
               label="Username"
               hint="Username"
               lazy-rules
@@ -25,6 +57,7 @@
             <q-input
               filled
               v-model="password"
+              type="password"
               label="Password"
               hint="Password"
               lazy-rules
@@ -45,12 +78,6 @@
                   <q-spinner-facebook/>
                 </template>
               </q-btn>
-            </div>
-
-            <div class="row justify-end">
-              <p>Don't you have an account?
-                <router-link to="/register">Register Now</router-link>
-              </p>
             </div>
           </q-form>
         </div>

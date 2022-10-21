@@ -1,67 +1,47 @@
-import {User} from 'src/model/User';
+import decode from 'jwt-decode';
+import {api} from 'src/boot/axios';
+import { LocalStorage } from 'quasar'
 
-const axios = require('axios')
-const decode = require('jwt-decode');
+class UserService {
+  signOut() {
+    LocalStorage.remove('token')
+    LocalStorage.remove('username')
+    LocalStorage.remove('roles')
+    LocalStorage.remove('refreshToken')
+    return true;
+  }
 
-function createUser(user: User) {
-  return axios.post('/core/user', user);
-}
+  isSignedIn() {
+    const token: string | null = LocalStorage.getItem('token');
+    const refreshToken = LocalStorage.getItem('refreshToken');
 
-function signIn(user: User) {
-  return axios.post('/core/login', {
-    username: user.username,
-    password: user.password
-  });
-}
+    if (token == null)
+      return false;
 
-function signOut() {
-  localStorage.removeItem('token')
-  localStorage.removeItem('username')
-  localStorage.removeItem('roles')
-  localStorage.removeItem('refreshToken')
-}
+    try {
+      const expiration: number = decode(token);
+      const isExpired = !!expiration && Date.now() > expiration * 1000;
 
-function isSignedIn() {
-  const token = localStorage.getItem('token');
-  const refreshToken = localStorage.getItem('refreshToken');
+      if (isExpired) {
+        const result = api.post('/core/oauth/access_token', {
+          refresh_token: refreshToken,
+          grant_type: 'refresh_token'
+        });
 
-  if (!token)
-    return false;
+        result.then(value => {
+          localStorage.setItem('token', value.data.access_token)
+        }).catch(() => {
+          return this.signOut();
+        });
 
-  try {
-    const {exp: expiration} = decode(token);
-    const isExpired = !!expiration && Date.now() > expiration * 1000;
-
-    if (isExpired) {
-      const result = Promise.resolve(axios.post('/core/oauth/access_token', {
-        refresh_token: refreshToken,
-        grant_type: 'refresh_token'
-      }));
-
-      result.then(value => {
-        localStorage.setItem('token', value.data.access_token)
-      }).catch(() => {
-        signOut();
-        return false;
-      });
+        return true;
+      }
 
       return true;
+    } catch (_) {
+      return false;
     }
-
-    return true;
-  } catch (_) {
-    return false;
   }
 }
 
-function isAdmin() {
-  return localStorage.getItem('roles') === 'ROLE_ADMIN'
-}
-
-export default {
-  createUser,
-  signIn,
-  signOut,
-  isSignedIn,
-  isAdmin
-}
+export const userService = new UserService();
