@@ -1,0 +1,1 @@
+insert into `users` (first_name, last_name, email, image_url, username, password, role_id) values (?, ?, ?, ?, ?, ?, ?);

@@ -1,0 +1,4 @@
+plugins {
+    id("io.micronaut.application") version "3.6.3"
+    id("com.weesftw.common")
+}

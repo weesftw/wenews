@@ -1,0 +1,27 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.micronaut.application") version "3.6.2"
+
+    id("com.weesftw.micronaut-core")
+}
+
+dependencies {
+    implementation project(":common")
+}
+
+application {
+    mainClass.set("com.weesftw.Application")
+}
+
+graalvmNative.toolchainDetection = false
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.weesftw.*")
+    }
+}
+
+
+

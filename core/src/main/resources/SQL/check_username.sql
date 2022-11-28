@@ -1,0 +1,1 @@
+select EXISTS(select `username` from `users` where `username` = ?) as has;

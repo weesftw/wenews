@@ -1,0 +1,4 @@
+rootProject.name="wenews"
+include("common")
+include("core")
+include("news")

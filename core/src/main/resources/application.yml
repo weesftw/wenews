@@ -1,0 +1,48 @@
+endpoints:
+  prometheus:
+    sensitive: false
+micronaut:
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+        step: PT1M
+        descriptions: true
+  security:
+    authentication: bearer
+    token:
+      propagation:
+        header:
+          enabled: true
+          headerName: "Authorization"
+          prefix: "Bearer "
+        enabled: true
+        service-id-regex: ${NEWS_API_URL}
+      jwt:
+        generator:
+          access-token:
+            expiration: 3600
+          refresh-token:
+            secret: ${JWT_GENERATOR_SIGNATURE_SECRET}
+        signatures:
+          secret:
+            generator:
+              secret: ${JWT_GENERATOR_SIGNATURE_SECRET}
+  application:
+    name: wenews
+  server:
+    port: 8080
+    idle-timeout: 60m
+    read-idle-timeout: 60m
+    write-idle-timeout: 60m
+netty:
+  default:
+    allocator:
+      max-order: 3
+rabbitmq:
+  uri: ${RABBITMQ_URL}
+vault:
+  path: ${VAULT_PATH:core/datasource}
+ds:
+  url: jdbc:mysql://localhost:3306/wenews?useTimezone=true&serverTimezone=UTC

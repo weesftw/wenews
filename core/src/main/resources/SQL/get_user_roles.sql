@@ -1,0 +1,1 @@
+select `r`.name from `users` join roles r on users.role_id = r.id where `username` = ? limit 1

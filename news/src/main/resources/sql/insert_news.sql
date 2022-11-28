@@ -1,0 +1,1 @@
+insert into `news_outbox` values (default, ?);

@@ -1,0 +1,1 @@
+select `password` from `users` where `username` = ? limit 1

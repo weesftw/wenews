@@ -1,0 +1,1 @@
+update `users` set `banned` = true where `username` = ?;
