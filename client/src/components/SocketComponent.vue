@@ -1,107 +1,72 @@
 <template>
-  <div>
-    <q-tab-panels
-      v-model="tab"
-      animated
-      vertical
-    >
-      <q-tab-panel name="chat">
-        <div id="socket-content">
+  <div class="q-mt-xl">
+    <div id="socket-content">
+      <div class="col-6">
+        <q-card flat bordered class="bg-grey-1">
+          <q-card-section>
+            <div class="row items-center no-wrap">
+              <div class="col">
+                <div class="text-h6 col-6">{{ $route.params.id.charAt(0).toUpperCase() + $route.params.id.slice(1) }}</div>
+              </div>
 
-          <div class="col-6">
-            <q-card flat bordered class="bg-grey-1">
-              <q-card-section>
-                <div class="row items-center no-wrap">
-                  <div class="col">
-                    <div class="text-h6">{{
-                        $route.params.id.charAt(0).toUpperCase() + $route.params.id.slice(1)
-                      }}
-                    </div>
+              <div class="q-mr-sm"><q-icon name="people" /> {{ usersConnected.length }}</div>
+
+              <div class="col-auto">
+                <q-btn round flat icon="expand_more">
+                  <q-menu cover auto-close>
+                    <q-list>
+                      <q-item clickable>
+                        <q-item-section @click="news = true">News</q-item-section>
+                      </q-item>
+                      <q-item clickable>
+                        <q-item-section @click="users = true">Users</q-item-section>
+                      </q-item>
+                    </q-list>
+                  </q-menu>
+                </q-btn>
+              </div>
+            </div>
+          </q-card-section>
+
+          <q-separator/>
+
+          <q-card-section>
+            <div class="q-pa-md row justify-center">
+              <div style="width: 100%">
+                <q-scroll-area id="chatArea" ref="chatScroll">
+                  <div class="q-pr-lg">
+                    <q-chat-message v-for="message in messages" :stamp="message.dateTime"
+                                    :name="message.socket.user.username"
+                                    :text="[message.content]"
+                                    :sent="message.socket.user.username === getUser?.username"
+                                    :key="message.socket.user.username"
+                                    :bg-color="message.bgColor"/>
                   </div>
+                </q-scroll-area>
+              </div>
+            </div>
+          </q-card-section>
 
-                  <div class="col-auto">
-                    <q-btn color="grey-7" round flat icon="more_vert">
-                      <q-menu cover auto-close>
-                        <q-list>
-                          <q-item clickable>
-                            <q-item-section @click="fixed = true">Users</q-item-section>
-                          </q-item>
-                          <q-item clickable>
-                            <q-item-section>Share</q-item-section>
-                          </q-item>
-                        </q-list>
-                      </q-menu>
-                    </q-btn>
-                  </div>
-                </div>
-              </q-card-section>
+          <q-separator/>
 
-              <q-separator/>
+          <q-form @submit.prevent="handle">
+            <q-card-actions>
+              <q-toolbar class="bg-grey-3 text-black row">
+                <q-btn round flat icon="insert_emoticon" class="q-mr-sm"/>
+                <q-input ref="inputFocus" type="text" rounded outlined dense class="WAL__field full-width q-mr-sm"
+                         bg-color="white" v-model="messageContent" placeholder="Type a message" maxlength="255"/>
+                <q-btn round flat type="submit" icon="send"/>
+              </q-toolbar>
+            </q-card-actions>
+          </q-form>
+        </q-card>
+      </div>
+    </div>
 
-              <q-card-section>
-                <div class="q-pa-md row justify-center">
-                  <div style="width: 100%">
-                    <q-scroll-area id="chatArea" ref="chatScroll">
-                      <div class="q-pr-lg">
-                        <q-chat-message v-for="message in messages" :stamp="message.dateTime"
-                                        :name="message.socket.user.username"
-                                        :text="[message.content]"
-                                        :sent="message.socket.user.username === getUser?.username"
-                                        :key="message.socket.user.username"
-                                        :bg-color="message.bgColor"/>
-                      </div>
-                    </q-scroll-area>
-                  </div>
-                </div>
-              </q-card-section>
-
-              <q-separator/>
-
-              <q-form @submit.prevent="handle">
-                <q-card-actions>
-                  <q-toolbar class="bg-grey-3 text-black row">
-                    <q-btn round flat icon="insert_emoticon" class="q-mr-sm"/>
-                    <q-input ref="inputFocus" type="text" rounded outlined dense class="WAL__field full-width q-mr-sm"
-                             bg-color="white" v-model="messageContent" placeholder="Type a message" maxlength="255"/>
-                    <q-btn round flat type="submit" icon="send"/>
-                  </q-toolbar>
-                </q-card-actions>
-              </q-form>
-            </q-card>
-          </div>
-        </div>
-      </q-tab-panel>
-
-      <q-tab-panel name="news">
-        <NewsComponent :articles="articles"/>
-      </q-tab-panel>
-    </q-tab-panels>
-
-    <q-separator/>
-
-    <q-tabs
-      v-model="tab"
-      dense
-      indicator-color="transparent"
-      align="justify"
-      narrow-indicator
-    >
-      <q-page-sticky position="bottom-right" :offset="[18, 18]">
-        <q-fab padding="none xl" color="primary" icon="keyboard_arrow_up" direction="up">
-          <q-fab-action color="primary">
-            <q-tab name="chat" icon="chat" style="width: 10px"/>
-          </q-fab-action>
-          <q-fab-action color="secondary">
-            <q-tab name="news" icon="newspaper" style="width: 10px"/>
-          </q-fab-action>
-        </q-fab>
-      </q-page-sticky>
-    </q-tabs>
-
-    <q-dialog v-model="fixed">
+    <q-dialog v-model="users">
       <q-card>
         <q-card-section>
-          <div class="text-h6">Users:</div>
+          <div class="text-h6">Users</div>
         </q-card-section>
 
         <q-separator/>
@@ -115,6 +80,26 @@
             </q-item-section>
             <q-item-section>{{ user.user.username }}</q-item-section>
           </q-item>
+        </q-card-section>
+
+        <q-separator/>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Close" color="primary" v-close-popup/>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+    <q-dialog v-model="news">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">News</div>
+        </q-card-section>
+
+        <q-separator/>
+
+        <q-card-section class="scroll">
+          <NewsComponent :articles="articles"/>
         </q-card-section>
 
         <q-separator/>
@@ -242,7 +227,8 @@ export default defineComponent({
       userState,
       messageContent,
       usersConnected,
-      fixed: ref(false),
+      users: ref(false),
+      news: ref(false),
       tab: ref('chat'),
       splitterModel: ref(20),
       socket,
