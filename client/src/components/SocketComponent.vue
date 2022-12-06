@@ -36,6 +36,7 @@
                 <q-scroll-area id="chatArea" ref="chatScroll">
                   <div class="q-pr-lg">
                     <q-chat-message v-for="message in messages" :stamp="message.dateTime"
+                                    :avatar="message.socket.user.imageUrl"
                                     :name="message.socket.user.username"
                                     :text="[message.content]"
                                     :sent="message.socket.user.username === getUser?.username"
