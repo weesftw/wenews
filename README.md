@@ -5,7 +5,7 @@ Real-time news API - [wenews.cf](http://wenews.cf)
 
 Creation of an integrating web application that will use public news APIs to allow the engagement of conversations on various subjects in real time.
 
-![general.png](assets/general.jpg)
+![general.png](assets/general.png)
 
 - Using [newsapi.org](http://newsapi.org) to map the news into the dev plan.
 
